@@ -14,10 +14,10 @@
   <div class="tasks__creator">
       <h1> Insert a new task</h1>
       <div class="task__group">
-        <input type="text" placeholder="New task">
+        <input type="text" [(ngModel)]="selectedTask.task" placeholder="New task">
       </div>
       <div class="note__group">
-        <textarea name="note" id="note" cols="" rows="" placeholder="Note"></textarea>
+        <textarea name="note" [(ngModel)]="selectedTask.note" id="note" cols="" rows="" placeholder="Note"></textarea>
       </div>
       <div class="time__group">
         <div class="today">
@@ -33,6 +33,9 @@
           <label for="week">This Week</label>
         </div>
       </div>
+      <button (click)="AddOrEditTask()">
+        Submit
+      </button>
   </div>
   <div class="tasklist__container">
     <h1 class="tasklist__title">Tasks for today</h1>
