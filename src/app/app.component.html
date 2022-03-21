@@ -40,7 +40,7 @@
   <div class="tasklist__container">
     <h1 class="tasklist__title">Tasks for today</h1>
     <ul class="tasklist">
-      <li *ngFor="let task of tasksArray" class="tasklist__item">
+      <li *ngFor="let task of tasksArray" class="tasklist__item" (click)="editTask(task)" [class.nombreClasse]="task === selectedTask">
         <span class="task__id">{{task.id}}</span> {{task.task}}
       </li>
     </ul>
