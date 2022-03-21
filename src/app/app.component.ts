@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Tasks } from './models/tasks';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -16,5 +17,12 @@ export class AppComponent {
   ]
 
   selectedTask: Tasks = new Tasks();
+
+  AddOrEditTask() {
+    this.selectedTask.id = this.tasksArray.length + 1;
+    this.tasksArray.push(this.selectedTask);
+
+    this.selectedTask = new Tasks();
+  }
 
 }
