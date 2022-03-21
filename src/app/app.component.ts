@@ -19,10 +19,16 @@ export class AppComponent {
   selectedTask: Tasks = new Tasks();
 
   AddOrEditTask() {
-    this.selectedTask.id = this.tasksArray.length + 1;
-    this.tasksArray.push(this.selectedTask);
+    if (!this.selectedTask.id) {
+      this.selectedTask.id = this.tasksArray.length + 1;
+      this.tasksArray.push(this.selectedTask);
+    }
 
     this.selectedTask = new Tasks();
+  }
+
+  editTask(task: Tasks) {
+    this.selectedTask = task;
   }
 
 }
