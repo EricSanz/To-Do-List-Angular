@@ -18,12 +18,10 @@
           <label for="today"><input type="radio" id="today-id" name="date" value="today" [(ngModel)]="selectedTask.date">Today</label>
         </div>
         <div class="tomorrow">
-          <input type="radio" id="tomorrow" name="date" value="tomorrow" [(ngModel)]="selectedTask.date">
-          <label for="tomorrow">Tomorrow</label>
+          <label for="tomorrow"><input type="radio" id="tomorrow" name="date" value="tomorrow" [(ngModel)]="selectedTask.date">Tomorrow</label>
         </div>
         <div class="week">
-          <input type="radio" id="week" name="date" value="week" [(ngModel)]="selectedTask.date">
-          <label for="week">This Week</label>
+          <label for="week"><input type="radio" id="week" name="date" value="week" [(ngModel)]="selectedTask.date">This Week</label>
         </div>
       </div>
       <div class="task__group">
@@ -48,15 +46,15 @@
     <div class="tasklist__container" *ngIf="todayTasksArray.length > 0">
       <h1 class="tasklist__title">Today's tasks <span class="tasklist__done">Done</span></h1>
       <ul class="tasklist">
-        <li *ngFor="let task of todayTasksArray" class="tasklist__item" (click)="editTask(task)" [class.nombreClasse]="task === selectedTask">
+        <li *ngFor="let task of todayTasksArray" class="tasklist__item" (click)="editTask(task)" [class.editing__task]="task === selectedTask">
           <span class="task__circle"></span><span class="completed task" *ngIf="task.completed">{{task.task}}</span> <span class="task" *ngIf="!task.completed">{{task.task}}</span><span class="completed__tick" (click)="task.completed = !task.completed" [class.completed__done]="task.completed"></span>
         </li>
       </ul>
     </div>
-    <div class="tasklist__container" *ngIf="tomorrowTasksArray.length > 0">
+    <div class="tasklist__container" *ngIf="tomorrowTasksArray.length > 0" >
       <h1 class="tasklist__title">Tomorrow's tasks <span class="tasklist__done">Done</span></h1>
       <ul class="tasklist">
-        <li *ngFor="let task of tomorrowTasksArray" class="tasklist__item" (click)="editTask(task)" [class.nombreClasse]="task === selectedTask">
+        <li *ngFor="let task of tomorrowTasksArray" class="tasklist__item" (click)="editTask(task)" [class.editing__task]="task === selectedTask">
           <span class="task__circle"></span><span class="completed task" *ngIf="task.completed">{{task.task}}</span> <span class="task" *ngIf="!task.completed">{{task.task}}</span><span class="completed__tick" (click)="task.completed = !task.completed" [class.completed__done]="task.completed"></span>
         </li>
       </ul>
@@ -64,12 +62,10 @@
     <div class="tasklist__container" *ngIf="weekTasksArray.length > 0">
       <h1 class="tasklist__title">Week's tasks <span class="tasklist__done">Done</span></h1>
       <ul class="tasklist">
-        <li *ngFor="let task of weekTasksArray" class="tasklist__item" (click)="editTask(task)" [class.nombreClasse]="task === selectedTask">
+        <li *ngFor="let task of weekTasksArray" class="tasklist__item" (click)="editTask(task)" [class.editing__task]="task === selectedTask">
           <span class="task__circle"></span><span class="completed task" *ngIf="task.completed">{{task.task}}</span> <span class="task" *ngIf="!task.completed">{{task.task}}</span><span class="completed__tick" (click)="task.completed = !task.completed" [class.completed__done]="task.completed"></span>
         </li>
       </ul>
     </div>
   </div>
 </div>
-
-<!-- <router-outlet></router-outlet> -->
