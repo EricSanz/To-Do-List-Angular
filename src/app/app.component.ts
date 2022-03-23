@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { Tasks } from './models/tasks';
 import { FormsModule } from '@angular/forms';
 import { faWindowClose } from '@fortawesome/free-solid-svg-icons';
@@ -8,6 +8,7 @@ import { faWindowClose } from '@fortawesome/free-solid-svg-icons';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
+
 export class AppComponent {
   title = 'Tasks App';
 
@@ -27,25 +28,31 @@ export class AppComponent {
   faDelete = faWindowClose;
 
   selectedTask: Tasks = new Tasks();
-
-
+  
   addTask(): void {
     if (!this.selectedTask.id) {
       if (this.selectedTask.date === 'today') {
-        this.selectedTask.id = this.todayTasksArray.length + 1;
-        this.todayTasksArray.push(this.selectedTask);
+        const found = this.todayTasksArray.find(task => task.task === this.selectedTask.task);
+        found === undefined ? (
+          this.selectedTask.id = this.todayTasksArray.length + 1 &&
+          this.todayTasksArray.push(this.selectedTask)
+        ) : null;
       } else if (this.selectedTask.date === 'tomorrow') {
-        this.selectedTask.id = this.tomorrowTasksArray.length + 1;
-        this.tomorrowTasksArray.push(this.selectedTask);
+        const found = this.tomorrowTasksArray.find(task => task.task === this.selectedTask.task);
+        found === undefined ? (
+          this.selectedTask.id = this.tomorrowTasksArray.length + 1 &&
+          this.tomorrowTasksArray.push(this.selectedTask)
+        ) : null;
       } else {
-        this.selectedTask.id = this.weekTasksArray.length + 1;
-        this.weekTasksArray.push(this.selectedTask);
+        const found = this.weekTasksArray.find(task => task.task === this.selectedTask.task);
+        found === undefined ? (
+          this.selectedTask.id = this.weekTasksArray.length + 1 &&
+          this.weekTasksArray.push(this.selectedTask)
+        ) : null;
       }
-    } 
+    }
     this.selectedTask = new Tasks();
   }
-
-
 
   editTask(task: Tasks): void {
     this.selectedTask = task;
@@ -55,8 +62,7 @@ export class AppComponent {
     if (task.date === 'today') {
       this.tomorrowTasksArray = this.tomorrowTasksArray.filter(list => list !== this.selectedTask);
       this.weekTasksArray = this.weekTasksArray.filter(list => list !== this.selectedTask);
-
-      const found = this.todayTasksArray.find(task => task.id === this.selectedTask.id);
+      const found = this.todayTasksArray.find(task => task.task === this.selectedTask.task);
       if (found === undefined) {
         this.selectedTask.id = this.todayTasksArray.length + 1;
         this.todayTasksArray.push(this.selectedTask);
@@ -67,7 +73,7 @@ export class AppComponent {
     } else if (task.date === 'tomorrow') {
       this.todayTasksArray = this.todayTasksArray.filter(list => list !== this.selectedTask);
       this.weekTasksArray = this.weekTasksArray.filter(list => list !== this.selectedTask);
-      const found = this.tomorrowTasksArray.find(task => task.id === this.selectedTask.id);
+      const found = this.tomorrowTasksArray.find(task => task.task === this.selectedTask.task);
       if (found === undefined) {
         this.selectedTask.id = this.tomorrowTasksArray.length + 1;
         this.tomorrowTasksArray.push(this.selectedTask);
@@ -79,7 +85,7 @@ export class AppComponent {
     } else if (task.date === 'week') {
       this.todayTasksArray = this.todayTasksArray.filter(list => list !== this.selectedTask);
       this.tomorrowTasksArray = this.tomorrowTasksArray.filter(list => list !== this.selectedTask);
-      const found = this.weekTasksArray.find(task => task.id === this.selectedTask.id);
+      const found = this.weekTasksArray.find(task => task.task === this.selectedTask.task);
       if (found === undefined) {
         this.selectedTask.id = this.weekTasksArray.length + 1;
         this.weekTasksArray.push(this.selectedTask);
@@ -88,7 +94,6 @@ export class AppComponent {
         this.selectedTask = new Tasks();
       }
     }
-
   }
 
   deleteTask(): void {
