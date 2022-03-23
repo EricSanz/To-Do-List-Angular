@@ -1,3 +1,5 @@
+@import './styles/colors';
+
 .content {
     width: 100vw;
     display: flex;
@@ -5,9 +7,9 @@
     justify-content: center;
     align-items: center;
     .tasks__creator {
-        height: 22em;
+        height: 23em;
         width: 22em;
-        background-color: #e8d1c5;
+        background-color: $softcream;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -21,11 +23,9 @@
             padding-bottom: .5em;
             text-align: center;
             font-size: 1.3rem;
-            margin-bottom: 1em;
-            color: #4b4b48;
-            background-color: #fff;
-            // border-top-left-radius: 1em;
-            // border-top-right-radius: 1em;
+            margin-bottom: 1.2em;
+            color: $softgrey;
+            background-color: $white;
             border-radius: 1em;
         }
         .task__group {
@@ -55,15 +55,8 @@
             display: flex;
             justify-content: space-between;
             padding-bottom: 1em;
-            .today {
-                label {
-                }
-            }
             input {
-                // appearance: none;
-                // width: .9em;
-                // height: .9em;
-                background-color: #fff;
+                background-color: $white;
                 margin-right: .5em;
             }
         }
@@ -78,37 +71,34 @@
                 height: 2em;
                 width: 5em;
                 border-radius: 1em;
-                background-color: #fff;
-                color: #4b4b48;
+                background-color: $white;
+                color: $softgrey;
                 &:hover {
-                    background-color: #4b4b48;
-                    color: #fff;
+                    background-color: $softgrey;
+                    color: $white;
                     cursor: pointer;
                 }
             }
         }
     }
     .tasklist__groups__container {
-        display: flex;
+        display: inline-flex;
         margin-top: 2em;
         margin-right: 4em;
+        margin-bottom: 2em;
         .tasklist__container {
             min-height: 21em;
             height: auto;
             padding-bottom: 1em;
             width: 30em;
             margin-left: 4em;
-            // margin-top: -1em;
-            background-color: #fff;
+            background-color: $white;
             border-radius: 1em;
             box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
             .tasklist__title {
                 font-size: 1.5rem;
-                // text-decoration: underline;
-                // margin-bottom: 1.5em;
                 margin: 1em 2em;
-                // text-align: center;
-                color: #4b4b48;
+                color: $softgrey;
                 position: relative;
             }
             .tasklist__done {
@@ -119,14 +109,12 @@
             .tasklist {
                 width: 20em;
                 .tasklist__item {
-                    // padding-bottom: .5em;
-                    // padding-top: .5em;
                     width: 24em;
                     display: flex;
                     margin-left: -1em;
                     padding: .5em .5em;
                     list-style: none;
-                    border-bottom: 2px solid #4b4b48;
+                    border-bottom: 2px solid $softgrey;
                     position: relative;
                     font-weight: 600;
                     height: auto;
@@ -134,8 +122,8 @@
                         height: .5em;
                         width: .5em;
                         margin-top: .5em;
-                        background-color: #4b4b48;
-                        color: #fff;
+                        background-color: $softgrey;
+                        color: $white;
                         border-radius: 50%;
                         margin-right: .5em;
                     }
@@ -154,18 +142,15 @@
                         align-items: center;
                         height: 1.2em;
                         width: 1.2em;
-                        background-color: #4b4b48;
+                        background-color: $softgrey;
                         border-radius: .2em;
                     }
                     .completed__done {
                         position: absolute;
                         right: -2.5em;
-                        // position: relative;
                         height: 1.2em;
                         width: 1.2em;
-                        // background-color: #fff;
-                        // border: 1px solid #4b4b48;
-                        background-color: #4b4b48;
+                        background-color: $softgrey;
                         border-radius: .2em;
                     }
                     .completed__done::after {
@@ -178,7 +163,7 @@
                         height: 0.5em;
                         width: .8em;
                         transform: rotate(45deg);
-                        border-top: 2px solid #fff;
+                        border-top: 2px solid $white;
                     }
                     .completed__done::before {
                         content: "";
@@ -190,7 +175,7 @@
                         height: 0.5em;
                         width: .8em;
                         transform: rotate(-45deg);
-                        border-top: 2px solid #fff;
+                        border-top: 2px solid $white;
                     }
                 }
             }
@@ -198,21 +183,20 @@
     }
 }
 
-.nombreClasse {
-    background-color: #e8d1c5;
-    color: #4b4b48;
+.editing__task {
+    background-color: $softcream;
+    color: $softgrey;
 }
 
 .toolbar {
     position: absolute;
+    width: 100vw;
     top: 0;
-    left: 0;
-    right: 0;
     height: 4em;
     display: flex;
     align-items: center;
-    background-color: #6b705c;
-    color: white;
+    background-color: $offgreen;
+    color: $white;
     font-weight: 600;
     img {
         margin: 0 1.5em;
