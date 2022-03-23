@@ -12,38 +12,63 @@
 <!-- Main -->
 <div class="content" role="main">
   <div class="tasks__creator">
-      <h1> Insert a new task</h1>
+      <h1> Insert new task</h1>
+      <div class="time__group">
+        <div class="today">
+          <label for="today"><input type="radio" id="today-id" name="date" value="today" [(ngModel)]="selectedTask.date">Today</label>
+        </div>
+        <div class="tomorrow">
+          <input type="radio" id="tomorrow" name="date" value="tomorrow" [(ngModel)]="selectedTask.date">
+          <label for="tomorrow">Tomorrow</label>
+        </div>
+        <div class="week">
+          <input type="radio" id="week" name="date" value="week" [(ngModel)]="selectedTask.date">
+          <label for="week">This Week</label>
+        </div>
+      </div>
       <div class="task__group">
         <input type="text" [(ngModel)]="selectedTask.task" placeholder="New task">
       </div>
       <div class="note__group">
         <textarea name="note" [(ngModel)]="selectedTask.note" id="note" cols="" rows="" placeholder="Note"></textarea>
       </div>
-      <div class="time__group">
-        <div class="today">
-          <input type="radio" id="today" name="date" value="today">
-          <label for="today">Today</label>
-        </div>
-        <div class="tomorrow">
-          <input type="radio" id="tomorrow" name="date" value="tomorrow">
-          <label for="tomorrow">Tomorrow</label>
-        </div>
-        <div class="week">
-          <input type="radio" id="week" name="date" value="week">
-          <label for="week">This Week</label>
-        </div>
+      <div class="buttons__container">
+        <button *ngIf="!selectedTask.id" (click)="addTask()">
+          Submit
+        </button>
+        <button *ngIf="selectedTask.date" (click)="saveEditTask(selectedTask)">
+          Edit
+        </button>
+        <button *ngIf="selectedTask.id" (click)="deleteTask()">
+          Delete
+        </button>
       </div>
-      <button (click)="AddOrEditTask()">
-        Submit
-      </button>
   </div>
-  <div class="tasklist__container">
-    <h1 class="tasklist__title">Tasks for today</h1>
-    <ul class="tasklist">
-      <li *ngFor="let task of tasksArray" class="tasklist__item" (click)="editTask(task)" [class.nombreClasse]="task === selectedTask">
-        <span class="task__id">{{task.id}}</span> {{task.task}}
-      </li>
-    </ul>
+  <div class="tasklist__groups__container">
+    <div class="tasklist__container" *ngIf="todayTasksArray.length > 0">
+      <h1 class="tasklist__title">Today's tasks <span class="tasklist__done">Done</span></h1>
+      <ul class="tasklist">
+        <li *ngFor="let task of todayTasksArray" class="tasklist__item" (click)="editTask(task)" [class.nombreClasse]="task === selectedTask">
+          <span class="task__circle"></span><span class="completed task" *ngIf="task.completed">{{task.task}}</span> <span class="task" *ngIf="!task.completed">{{task.task}}</span><span class="completed__tick" (click)="task.completed = !task.completed" [class.completed__done]="task.completed"></span>
+        </li>
+      </ul>
+    </div>
+    <div class="tasklist__container" *ngIf="tomorrowTasksArray.length > 0">
+      <h1 class="tasklist__title">Tomorrow's tasks <span class="tasklist__done">Done</span></h1>
+      <ul class="tasklist">
+        <li *ngFor="let task of tomorrowTasksArray" class="tasklist__item" (click)="editTask(task)" [class.nombreClasse]="task === selectedTask">
+          <span class="task__circle"></span><span class="completed task" *ngIf="task.completed">{{task.task}}</span> <span class="task" *ngIf="!task.completed">{{task.task}}</span><span class="completed__tick" (click)="task.completed = !task.completed" [class.completed__done]="task.completed"></span>
+        </li>
+      </ul>
+    </div>
+    <div class="tasklist__container" *ngIf="weekTasksArray.length > 0">
+      <h1 class="tasklist__title">Week's tasks <span class="tasklist__done">Done</span></h1>
+      <ul class="tasklist">
+        <li *ngFor="let task of weekTasksArray" class="tasklist__item" (click)="editTask(task)" [class.nombreClasse]="task === selectedTask">
+          <span class="task__circle"></span><span class="completed task" *ngIf="task.completed">{{task.task}}</span> <span class="task" *ngIf="!task.completed">{{task.task}}</span><span class="completed__tick" (click)="task.completed = !task.completed" [class.completed__done]="task.completed"></span>
+        </li>
+      </ul>
+    </div>
   </div>
 </div>
 
