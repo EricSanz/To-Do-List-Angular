@@ -33,10 +33,10 @@
         <textarea name="note" [(ngModel)]="selectedTask.note" id="note" cols="" rows="" placeholder="Note"></textarea>
       </div>
       <div class="buttons__container">
-        <button *ngIf="!selectedTask.id" (click)="addTask()">
+        <button *ngIf="selectedTask && !selectedTask.id" (click)="addTask()">
           Submit
         </button>
-        <button *ngIf="selectedTask.date" (click)="saveEditTask(selectedTask)">
+        <button *ngIf="selectedTask.id" (click)="saveEditTask(selectedTask)">
           Edit
         </button>
         <button *ngIf="selectedTask.id" (click)="deleteTask()">
