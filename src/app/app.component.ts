@@ -38,33 +38,26 @@ export class AppComponent implements OnInit {
 
   unseePopup(): any {
     this.popup?.nativeElement.classList.remove('see');
-    this.popup?.nativeElement.classList.add('unsee');
-    clearInterval(this.popUpShown);
-  }
-  
-  seePopup() {
-    this.popup?.nativeElement.classList.add('see');
-    this.popUpShown;
+    this.popup?.nativeElement.classList.add('popup');
   }
 
-  time: number = 14000;
+  time: number = 6000;
 
-  popUpShown = setInterval(() => {this.unseePopup()}, this.time);
+  popUpShown = setInterval(() => this.unseePopup(), this.time);
 
   // Add new Task any of the taskArrays, depending on which date you select and empty inputs when added.
   public addTask(): void {
     if (!this.selectedTask.id) {
       if (this.selectedTask.date === 'today') {
-
-        // Look for the task, if not found --> create it, if found --> popup show up.
-        const found = this.todayTasksArray.find(task => task.task === this.selectedTask.task);
-        found === undefined ? (
-          this.selectedTask.id = this.todayTasksArray.length + 1 &&
-          this.todayTasksArray.push(this.selectedTask)
-        ) : (
-          this.popup?.nativeElement.classList.add('see') &&
-          this.popUpShown
-        );
+          // Look for the task, if not found --> create it, if found --> popup show up.
+          const found = this.todayTasksArray.find(task => task.task === this.selectedTask.task);
+          found === undefined ? (
+            this.selectedTask.id = this.todayTasksArray.length + 1 &&
+            this.todayTasksArray.push(this.selectedTask)
+          ) : (
+            this.popup?.nativeElement.classList.add('see') &&
+            this.popUpShown
+          );
       } else if (this.selectedTask.date === 'tomorrow') {
         const found = this.tomorrowTasksArray.find(task => task.task === this.selectedTask.task);
         found === undefined ? (
