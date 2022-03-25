@@ -1,22 +1,5 @@
 @import './styles/colors';
-
-@keyframes display {
-    0% {
-        opacity: 1;
-    }
-    25% {
-        opacity: 0;
-    }
-    50% {
-        opacity: 1;
-    }
-    75% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
-}
+@import './styles/keyframes';
 
 .content {
     width: 100vw;
@@ -123,7 +106,7 @@
     }
     .tasklist__groups__container {
         display: inline-flex;
-        margin-top: 2em;
+        margin-top: 1.5em;
         margin-right: 4em;
         margin-bottom: 2em;
         .tasklist__container {
@@ -227,18 +210,3 @@
     background-color: $softcream;
     color: $softgrey;
 }
-
-// .toolbar {
-//     position: absolute;
-//     width: 100vw;
-//     top: 0;
-//     height: 4em;
-//     display: flex;
-//     align-items: center;
-//     background-color: $offgreen;
-//     color: $white;
-//     font-weight: 600;
-//     img {
-//         margin: 0 1.5em;
-//     }
-// }
