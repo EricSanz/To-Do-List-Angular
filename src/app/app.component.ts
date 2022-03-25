@@ -45,9 +45,10 @@ export class AppComponent implements OnInit {
     this.popUpShown;
   }
 
-  popUpShown = setInterval(() => {this.unseePopup()}, 14000);
+  time: number = 14000;
 
-  // time: number = 500;
+  popUpShown = setInterval(() => {this.unseePopup()}, this.time);
+
 
   public addTask(): void {
     if (!this.selectedTask.id) {
