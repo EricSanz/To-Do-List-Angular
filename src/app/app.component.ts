@@ -66,13 +66,19 @@ export class AppComponent implements OnInit {
         found === undefined ? (
           this.selectedTask.id = this.tomorrowTasksArray.length + 1 &&
           this.tomorrowTasksArray.push(this.selectedTask)
-        ) : (this.popup?.nativeElement.classList.add('see'));
+        ) : (
+          this.popup?.nativeElement.classList.add('see') &&
+          this.popUpShown
+          );
       } else {
         const found = this.weekTasksArray.find(task => task.task === this.selectedTask.task);
         found === undefined ? (
           this.selectedTask.id = this.weekTasksArray.length + 1 &&
           this.weekTasksArray.push(this.selectedTask)
-        ) : (this.popup?.nativeElement.classList.add('see'));
+        ) : (
+          this.popup?.nativeElement.classList.add('see') &&
+          this.popUpShown
+          );
       }
     }
     this.selectedTask = new Tasks();
