@@ -1,6 +1,5 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Tasks } from './models/tasks';
-import { FormsModule } from '@angular/forms';
 import { faWindowClose } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -9,7 +8,10 @@ import { faWindowClose } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./app.component.scss']
 })
 
-export class AppComponent {
+export class AppComponent implements OnInit {
+
+  @ViewChild('popupTag') popup: ElementRef | undefined;
+
   title = 'Tasks App';
 
   todayTasksArray: Tasks[] = [
@@ -28,37 +30,58 @@ export class AppComponent {
   faDelete = faWindowClose;
 
   selectedTask: Tasks = new Tasks();
+
+  public ngOnInit(): void {
+  }
+
+  unseePopup(): any {
+    this.popup?.nativeElement.classList.remove('see');
+    this.popup?.nativeElement.classList.add('unsee');
+    clearInterval(this.popUpShown);
+  }
   
-  addTask(): void {
+  seePopup() {
+    this.popup?.nativeElement.classList.add('see');
+    this.popUpShown;
+  }
+
+  popUpShown = setInterval(() => {this.unseePopup()}, 14000);
+
+  // time: number = 500;
+
+  public addTask(): void {
     if (!this.selectedTask.id) {
       if (this.selectedTask.date === 'today') {
         const found = this.todayTasksArray.find(task => task.task === this.selectedTask.task);
         found === undefined ? (
           this.selectedTask.id = this.todayTasksArray.length + 1 &&
           this.todayTasksArray.push(this.selectedTask)
-        ) : null;
+        ) : (
+          this.popup?.nativeElement.classList.add('see') &&
+          this.popUpShown
+        );
       } else if (this.selectedTask.date === 'tomorrow') {
         const found = this.tomorrowTasksArray.find(task => task.task === this.selectedTask.task);
         found === undefined ? (
           this.selectedTask.id = this.tomorrowTasksArray.length + 1 &&
           this.tomorrowTasksArray.push(this.selectedTask)
-        ) : null;
+        ) : (this.popup?.nativeElement.classList.add('see'));
       } else {
         const found = this.weekTasksArray.find(task => task.task === this.selectedTask.task);
         found === undefined ? (
           this.selectedTask.id = this.weekTasksArray.length + 1 &&
           this.weekTasksArray.push(this.selectedTask)
-        ) : null;
+        ) : (this.popup?.nativeElement.classList.add('see'));
       }
     }
     this.selectedTask = new Tasks();
   }
 
-  editTask(task: Tasks): void {
+  public editTask(task: Tasks): void {
     this.selectedTask = task;
   }
 
-  saveEditTask(task: Tasks): void {
+  public saveEditTask(task: Tasks): void {
     if (task.date === 'today') {
       this.tomorrowTasksArray = this.tomorrowTasksArray.filter(list => list !== this.selectedTask);
       this.weekTasksArray = this.weekTasksArray.filter(list => list !== this.selectedTask);
@@ -96,7 +119,7 @@ export class AppComponent {
     }
   }
 
-  deleteTask(): void {
+  public deleteTask(): void {
     this.todayTasksArray = this.todayTasksArray.filter(list => list !== this.selectedTask);
     this.tomorrowTasksArray = this.tomorrowTasksArray.filter(list => list !== this.selectedTask);
     this.weekTasksArray = this.weekTasksArray.filter(list => list !== this.selectedTask);
