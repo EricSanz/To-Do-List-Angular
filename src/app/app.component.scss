@@ -11,8 +11,8 @@
 
     // --------------------------------> Pop-Up <--------------------------------
     .popup {
-        animation: display 5s normal forwards;
-        animation-delay: 2s;
+        animation: display 2000ms normal forwards;
+        animation-delay: 2000ms;
         display: none;
         transition: 250ms;
         height: 3em;
