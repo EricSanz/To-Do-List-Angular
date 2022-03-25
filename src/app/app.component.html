@@ -1,16 +1,8 @@
 
-<!-- Toolbar -->
-<div class="toolbar" role="banner">
-  <img
-    width="40"
-    alt="Angular Logo"
-    src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg=="
-  />
-  <span>To do List - {{ title }}</span>
-</div>
-
 <!-- Main -->
 <div class="content" role="main">
+
+  <!-- Task Creator -->
   <div class="tasks__creator">
       <h1> Insert new task</h1>
       <div class="time__group">
@@ -30,6 +22,8 @@
       <div class="note__group">
         <textarea name="note" [(ngModel)]="selectedTask.note" id="note" cols="" rows="" placeholder="Note"></textarea>
       </div>
+
+      <!-- Task buttons -->
       <div class="buttons__container">
         <button *ngIf="selectedTask && !selectedTask.id" (click)="addTask()">
           Submit
@@ -42,7 +36,16 @@
         </button>
       </div>
   </div>
+
+  <!-- Pop-up -->
+  <div class="popup" #popupTag>
+    <p>This task is already on the list.</p>
+  </div>
+
+  <!-- Task Groups -->
   <div class="tasklist__groups__container">
+
+    <!-- Today's tasks -->
     <div class="tasklist__container" *ngIf="todayTasksArray.length > 0">
       <h1 class="tasklist__title">Today's tasks <span class="tasklist__done">Done</span></h1>
       <ul class="tasklist">
@@ -51,6 +54,8 @@
         </li>
       </ul>
     </div>
+
+    <!-- Tomorrow's tasks -->
     <div class="tasklist__container" *ngIf="tomorrowTasksArray.length > 0" >
       <h1 class="tasklist__title">Tomorrow's tasks <span class="tasklist__done">Done</span></h1>
       <ul class="tasklist">
@@ -59,6 +64,8 @@
         </li>
       </ul>
     </div>
+
+    <!-- Week's tasks -->
     <div class="tasklist__container" *ngIf="weekTasksArray.length > 0">
       <h1 class="tasklist__title">Week's tasks <span class="tasklist__done">Done</span></h1>
       <ul class="tasklist">
