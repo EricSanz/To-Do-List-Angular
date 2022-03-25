@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Tasks } from './models/tasks';
-import { faWindowClose } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-root',
@@ -10,10 +9,15 @@ import { faWindowClose } from '@fortawesome/free-solid-svg-icons';
 
 export class AppComponent implements OnInit {
 
+  public ngOnInit(): void {
+  }
+
+  // PopUp html element.
   @ViewChild('popupTag') popup: ElementRef | undefined;
 
   title = 'Tasks App';
 
+  // Diferent dates Task array.
   todayTasksArray: Tasks[] = [
     {id: 1, task: "Make Laura's birthday cake.", note: "Remember to buy especial chocolate for cover", date:"today", completed: false},
     {id: 2, task: "Wash the dishes", note: "", date:"today", completed: true},
@@ -27,12 +31,10 @@ export class AppComponent implements OnInit {
   weekTasksArray: Tasks[] = [
   ]
 
-  faDelete = faWindowClose;
-
+  //selected Task
   selectedTask: Tasks = new Tasks();
 
-  public ngOnInit(): void {
-  }
+  // pop-Up Display
 
   unseePopup(): any {
     this.popup?.nativeElement.classList.remove('see');
@@ -49,10 +51,12 @@ export class AppComponent implements OnInit {
 
   popUpShown = setInterval(() => {this.unseePopup()}, this.time);
 
-
+  // Add new Task any of the taskArrays, depending on which date you select and empty inputs when added.
   public addTask(): void {
     if (!this.selectedTask.id) {
       if (this.selectedTask.date === 'today') {
+
+        // Look for the task, if not found --> create it, if found --> popup show up.
         const found = this.todayTasksArray.find(task => task.task === this.selectedTask.task);
         found === undefined ? (
           this.selectedTask.id = this.todayTasksArray.length + 1 &&
@@ -84,15 +88,23 @@ export class AppComponent implements OnInit {
     this.selectedTask = new Tasks();
   }
 
+  // Inputs get selected task info so it can be edit.
   public editTask(task: Tasks): void {
     this.selectedTask = task;
   }
 
+  // Edit task selected
   public saveEditTask(task: Tasks): void {
     if (task.date === 'today') {
+
+      // Eliminate task from the other arrays just in case is getting moved to this array.
       this.tomorrowTasksArray = this.tomorrowTasksArray.filter(list => list !== this.selectedTask);
       this.weekTasksArray = this.weekTasksArray.filter(list => list !== this.selectedTask);
+
+      //Search for the task in array.
       const found = this.todayTasksArray.find(task => task.task === this.selectedTask.task);
+
+      // If not found, create it.
       if (found === undefined) {
         this.selectedTask.id = this.todayTasksArray.length + 1;
         this.todayTasksArray.push(this.selectedTask);
@@ -126,6 +138,7 @@ export class AppComponent implements OnInit {
     }
   }
 
+  // Delete task
   public deleteTask(): void {
     this.todayTasksArray = this.todayTasksArray.filter(list => list !== this.selectedTask);
     this.tomorrowTasksArray = this.tomorrowTasksArray.filter(list => list !== this.selectedTask);
