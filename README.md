@@ -6,7 +6,7 @@ Visit https://to-do-list-angular-delta.vercel.app to have a closer look of the A
 
 ## Technologies used
 
-Angular 13 | TypeScript | SASS | Vercel 
+Angular  |  TypeScript  |  SASS  |  Vercel 
 
 ## Project setup
 
